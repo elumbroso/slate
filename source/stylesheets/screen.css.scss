@@ -76,6 +76,9 @@ html, body {
     display: block;
     max-width: 100%;
     margin-bottom: $logo-margin;
+    max-width: 50%;
+    text-align: center;
+    margin: 0 auto;
   }
 
   &>.search {
@@ -612,4 +615,9 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+h1 {
+  position: sticky;
+  top: 0;
 }
