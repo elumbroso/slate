@@ -280,6 +280,21 @@
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 <h1 id='space'>Space</h1>
+<blockquote>
+<p>Request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="s2">"space"</span><span class="p">:[</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="mi">456</span><span class="p">],</span><span class="w"> 
+        </span><span class="s2">"site_level2"</span><span class="p">:[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"B"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w"> 
+
+</span></code></pre>
 <p>Sélection des sites/Niveaux 2 choisis pour l’analyse. </p>
 
 <p>L’objet « space » est une liste d’objet qui sont composé comme suit : </p>
@@ -299,30 +314,13 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <td>liste d’identifiant de site, séparés par des virgules</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>Request body:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="s2">"space"</span><span class="p">:[</span><span class="w"> 
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="mi">456</span><span class="p">],</span><span class="w"> 
-        </span><span class="s2">"site_level2"</span><span class="p">:[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"B"</span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w"> 
-
-</span></code></pre><h1 id='periodes'>Periodes</h1>
+<h1 id='periodes'>Periodes</h1>
 <p>L’objet « p1 » est obligatoire, il décrit la période de référence ou principale d’analyse.</p>
 
 <p>L’objet « p2 » est facultatif, il décrit la période de comparaison.</p>
 
 <p>Seules les périodes « p1 » et « p2 » fonctionnent aujourd’hui.</p>
 <h2 id='periodes-absolues'>Périodes absolues</h2>
-<p>Format de Date : <strong><em>yyyy-mm-dd</em></strong></p>
-
 <blockquote>
 <p>Request body</p>
 </blockquote>
@@ -357,25 +355,9 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
         </span><span class="p">]</span><span class="w">
 
   </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='periodes-relatives'>Périodes relatives</h2>
-<p>L’heure actuelle dans le fuseau horaire du site le plus à l’ouest est le référentiel.</p>
-
-<table><thead>
-<tr>
-<th>Paramètres</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>granularity</td>
-<td>Granularité de la période</td>
-</tr>
-<tr>
-<td>offset</td>
-<td>Décalage de la période</td>
-</tr>
-</tbody></table>
-
+</span></code></pre>
+<p>Format de Date : <strong><em>yyyy-mm-dd</em></strong></p>
+<h2 id='periodes-relatives'>Périodes relatives</h2>
 <blockquote>
 <p>Request body</p>
 </blockquote>
@@ -410,7 +392,62 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
     </span><span class="p">]</span><span class="w">
 
   </span><span class="p">}</span><span class="w">
-</span></code></pre><h1 id='evolution'>Evolution</h1>
+</span></code></pre>
+<p>L’heure actuelle dans le fuseau horaire du site le plus à l’ouest est le référentiel.</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>granularity</td>
+<td>Granularité de la période</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Décalage de la période</td>
+</tr>
+</tbody></table>
+<h1 id='evolution'>Evolution</h1>
+<blockquote>
+<p>Request body </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="s2">"evo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+
+    </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
+
+    </span><span class="s2">"top"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+
+      </span><span class="s2">"max-results"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> 
+
+      </span><span class="s2">"page-num"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+
+      </span><span class="s2">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-m_visits"</span><span class="p">],</span><span class="w"> 
+
+      </span><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+
+        </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+
+          </span><span class="p">{</span><span class="w"> 
+
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
+
+            </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-12"</span><span class="p">,</span><span class="w"> 
+
+            </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-16"</span><span class="w"> 
+
+          </span><span class="p">}</span><span class="w"> 
+
+        </span><span class="p">]</span><span class="w"> 
+
+      </span><span class="p">}</span><span class="w"> 
+
+    </span><span class="p">}</span><span class="w"> 
+
+  </span><span class="p">}</span><span class="w"> 
+</span></code></pre>
 <p>Le paramètre « evo » décrit le contexte du calcul de l’évolution de l’analyse. Il est composé de différents paramètres obligatoires : </p>
 
 <table><thead>
@@ -450,44 +487,14 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <td>any number</td>
 </tr>
 </tbody></table>
-
+<h1 id='sort'>Sort</h1>
 <blockquote>
-<p>Request body </p>
+<p>Request body:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"evo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="s2">"sort"</span><span class="p">:[</span><span class="s2">"m_visits"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-p1.m_uv"</span><span class="p">]</span><span class="w"> 
 
-    </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
-
-    </span><span class="s2">"top"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-
-      </span><span class="s2">"max-results"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> 
-
-      </span><span class="s2">"page-num"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-
-      </span><span class="s2">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-m_visits"</span><span class="p">],</span><span class="w"> 
-
-      </span><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-
-        </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
-
-          </span><span class="p">{</span><span class="w"> 
-
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
-
-            </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-12"</span><span class="p">,</span><span class="w"> 
-
-            </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-16"</span><span class="w"> 
-
-          </span><span class="p">}</span><span class="w"> 
-
-        </span><span class="p">]</span><span class="w"> 
-
-      </span><span class="p">}</span><span class="w"> 
-
-    </span><span class="p">}</span><span class="w"> 
-
-  </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h1 id='sort'>Sort</h1>
+</span></code></pre>
 <p>Le &quot;-&quot; permet de trier de manière décroissante. </p>
 
 <p>Il est possible de trier sur autant de colonnes que souhaitées. </p>
@@ -495,16 +502,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <p>Il n&#39;est pas possible de trier sur une propriété, le tri s&#39;effectue seulement sur une ou plusieurs métriques. </p>
 
 <p>Il n&#39;est pas possible de trier sur une colonne non présente dans le paramètre &quot;columns&quot; de l&#39;URL.</p>
-
-<blockquote>
-<p>Request body:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="s2">"sort"</span><span class="p">:[</span><span class="s2">"m_visits"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-p1.m_uv"</span><span class="p">]</span><span class="w"> 
-
-</span></code></pre><h1 id='columns'>Columns</h1>
-<p>Identification des colonnes à afficher dans les données de retour.</p>
-
+<h1 id='columns'>Columns</h1>
 <blockquote>
 <p>Request body</p>
 </blockquote>
@@ -518,7 +516,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
   </span><span class="p">]</span><span class="w"> 
 </span></code></pre>
-<p>En multi périodes, les métriques doivent être préfixées par la période sur laquelle elles s’appliquent :  </p>
+<p>Identification des colonnes à afficher dans les données de retour.</p>
 
 <blockquote>
 <p>Request body with multiple periods</p>
@@ -535,6 +533,8 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 </span><span class="p">]</span><span class="w"> 
 </span></code></pre>
+<p>En multi périodes, les métriques doivent être préfixées par la période sur laquelle elles s’appliquent :  </p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
