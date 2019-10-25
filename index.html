@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>AT Internet - API v3 documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -198,10 +198,10 @@
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+      <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;javascript&quot;,&quot;shell&quot;,&quot;python&quot;,&quot;ruby&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,29 +212,51 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="ruby">ruby</a>
         </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#basic-example" class="toc-h1 toc-link" data-title="Basic example">Basic example</a>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#space" class="toc-h1 toc-link" data-title="Space">Space</a>
+            <a href="#sites-level-2-sites" class="toc-h1 toc-link" data-title="Sites / Level 2 sites">Sites / Level 2 sites</a>
           </li>
           <li>
-            <a href="#periodes" class="toc-h1 toc-link" data-title="Periodes">Periodes</a>
+            <a href="#properties-and-metrics" class="toc-h1 toc-link" data-title="Properties and metrics">Properties and metrics</a>
+          </li>
+          <li>
+            <a href="#period" class="toc-h1 toc-link" data-title="Period">Period</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#periodes-absolues" class="toc-h2 toc-link" data-title="Périodes absolues">Périodes absolues</a>
+                    <a href="#absolute-periods" class="toc-h2 toc-link" data-title="Absolute periods">Absolute periods</a>
                   </li>
                   <li>
-                    <a href="#periodes-relatives" class="toc-h2 toc-link" data-title="Périodes relatives">Périodes relatives</a>
+                    <a href="#relative-periods" class="toc-h2 toc-link" data-title="Relative periods">Relative periods</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#filter" class="toc-h1 toc-link" data-title="Filter">Filter</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#filter-on-number" class="toc-h2 toc-link" data-title="Filter on number">Filter on number</a>
+                  </li>
+                  <li>
+                    <a href="#filter-on-string" class="toc-h2 toc-link" data-title="Filter on string">Filter on string</a>
+                  </li>
+                  <li>
+                    <a href="#filter-on-date" class="toc-h2 toc-link" data-title="Filter on date">Filter on date</a>
+                  </li>
+                  <li>
+                    <a href="#filter-on-boolean" class="toc-h2 toc-link" data-title="Filter on boolean">Filter on boolean</a>
                   </li>
               </ul>
           </li>
@@ -242,219 +264,540 @@
             <a href="#evolution" class="toc-h1 toc-link" data-title="Evolution">Evolution</a>
           </li>
           <li>
-            <a href="#sort" class="toc-h1 toc-link" data-title="Sort">Sort</a>
+            <a href="#sort-by" class="toc-h1 toc-link" data-title="Sort by">Sort by</a>
           </li>
           <li>
-            <a href="#columns" class="toc-h1 toc-link" data-title="Columns">Columns</a>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>API DQ3</p>
+<aside class="warning">
+This API is always in beta, please don't use it in production.
+</aside>
+
+<p>This example API documentation page was created with <a href="https://github.com/shamin/greenboard">Greenboard</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<h1 id='basic-example'>Basic example</h1><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.atinternet.io/data/getData"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"x-api-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'YOURAPIKEY'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">columns</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">visit_device_type</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">m_visits</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">m_users</span><span class="se">\"\n</span><span class="s2"> ],</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">sort</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">-m_visits</span><span class="se">\"\n</span><span class="s2"> ],</span><span class="se">\n\"</span><span class="s2">space</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">s</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">     429023</span><span class="se">\n</span><span class="s2">   ]</span><span class="se">\n</span><span class="s2"> },</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">period</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">p1</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">     {</span><span class="se">\n</span><span class="s2">       </span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">D</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">       </span><span class="se">\"</span><span class="s2">start</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2019-10-24</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">       </span><span class="se">\"</span><span class="s2">end</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2019-10-24</span><span class="se">\"\n</span><span class="s2">     }</span><span class="se">\n</span><span class="s2">   ]</span><span class="se">\n</span><span class="s2"> },</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">max-results</span><span class="se">\"</span><span class="s2">: 50,</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">page-num</span><span class="se">\"</span><span class="s2">: 1</span><span class="se">\n</span><span class="s2">}"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s">"api,atinternet,io"</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\n</span><span class="s"> </span><span class="se">\"</span><span class="s">columns</span><span class="se">\"</span><span class="s">: [</span><span class="se">\n</span><span class="s">   </span><span class="se">\"</span><span class="s">visit_device_type</span><span class="se">\"</span><span class="s">,</span><span class="se">\n</span><span class="s">   </span><span class="se">\"</span><span class="s">m_visits</span><span class="se">\"</span><span class="s">,</span><span class="se">\n</span><span class="s">   </span><span class="se">\"</span><span class="s">m_users</span><span class="se">\"\n</span><span class="s"> ],</span><span class="se">\n</span><span class="s"> </span><span class="se">\"</span><span class="s">sort</span><span class="se">\"</span><span class="s">: [</span><span class="se">\n</span><span class="s">   </span><span class="se">\"</span><span class="s">-m_visits</span><span class="se">\"\n</span><span class="s"> ],</span><span class="se">\n\"</span><span class="s">space</span><span class="se">\"</span><span class="s">: {</span><span class="se">\n</span><span class="s">   </span><span class="se">\"</span><span class="s">s</span><span class="se">\"</span><span class="s">: [</span><span class="se">\n</span><span class="s">     429023</span><span class="se">\n</span><span class="s">   ]</span><span class="se">\n</span><span class="s"> },</span><span class="se">\n</span><span class="s"> </span><span class="se">\"</span><span class="s">period</span><span class="se">\"</span><span class="s">: {</span><span class="se">\n</span><span class="s">   </span><span class="se">\"</span><span class="s">p1</span><span class="se">\"</span><span class="s">: [</span><span class="se">\n</span><span class="s">     {</span><span class="se">\n</span><span class="s">       </span><span class="se">\"</span><span class="s">type</span><span class="se">\"</span><span class="s">: </span><span class="se">\"</span><span class="s">D</span><span class="se">\"</span><span class="s">,</span><span class="se">\n</span><span class="s">       </span><span class="se">\"</span><span class="s">start</span><span class="se">\"</span><span class="s">: </span><span class="se">\"</span><span class="s">2019-10-24</span><span class="se">\"</span><span class="s">,</span><span class="se">\n</span><span class="s">       </span><span class="se">\"</span><span class="s">end</span><span class="se">\"</span><span class="s">: </span><span class="se">\"</span><span class="s">2019-10-24</span><span class="se">\"\n</span><span class="s">     }</span><span class="se">\n</span><span class="s">   ]</span><span class="se">\n</span><span class="s"> },</span><span class="se">\n</span><span class="s"> </span><span class="se">\"</span><span class="s">max-results</span><span class="se">\"</span><span class="s">: 50,</span><span class="se">\n</span><span class="s"> </span><span class="se">\"</span><span class="s">page-num</span><span class="se">\"</span><span class="s">: 1</span><span class="se">\n</span><span class="s">}"</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">"YOURAPIKEY"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"data,getData"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://api.atinternet.io/data/getData <span class="se">\</span>
+  -H <span class="s1">'x-api-key: YOURAPIKEY'</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+ "columns": [
+   "visit_device_type",
+   "m_visits",
+   "m_users"
+ ],
+ "sort": [
+   "-m_visits"
+ ],
+ "space": {
+   "s": [
+     429023
+   ]
+ },
+ "period": {
+   "p1": [
+     {
+       "type": "D",
+       "start": "2019-10-24",
+       "end": "2019-10-24"
+     }
+   ]
+ },
+ "max-results": 50,
+ "page-num": 1
+}'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="s2">"columns"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"visit_device_type"</span><span class="p">,</span>
+    <span class="s2">"m_visits"</span><span class="p">,</span>
+    <span class="s2">"m_users"</span>
+  <span class="p">],</span>
+  <span class="s2">"sort"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"-m_visits"</span>
+  <span class="p">],</span>
+  <span class="s2">"space"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"s"</span><span class="p">:</span> <span class="p">[</span>
+     <span class="mi">429023</span>
+   <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"period"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"p1"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"D"</span><span class="p">,</span>
+        <span class="s2">"start"</span><span class="p">:</span> <span class="s2">"2019-10-24"</span><span class="p">,</span>
+        <span class="s2">"end"</span><span class="p">:</span> <span class="s2">"2019-10-24"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"max-results"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="s2">"page-num"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"readystatechange"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span> <span class="s2">"https://api.atinternet.io/data/getData"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">"x-api-key"</span><span class="p">,</span> <span class="s2">"YOURAPIKEY"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre>
+<p>The v3 API doesn&#39;t accept any <code>GET</code> request anymore, you have to use a <code>POST</code> request with a json body.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#sites--level-2-sites">space</a></td>
+<td>true</td>
+<td>Analysis space (site, level2, multi-sites).</td>
+</tr>
+<tr>
+<td><a href="#properties-and-metrics">columns</a></td>
+<td>true</td>
+<td>List of properties/metrics to retrieve (separated by a comma in the call).</td>
+</tr>
+<tr>
+<td><a href="#period">period</a></td>
+<td>true</td>
+<td>Analysis period (single, multiple, relative).</td>
+</tr>
+<tr>
+<td><a href="#filter">filter</a></td>
+<td>false</td>
+<td>Filters to be applied on properties/metrics.</td>
+</tr>
+<tr>
+<td><a href="#evolution">evo</a></td>
+<td>false</td>
+<td>To obtain the evolution of a group of metrics  over a certain time period.</td>
+</tr>
+<tr>
+<td><a href="#sort">sort</a></td>
+<td>true</td>
+<td>List of properties/ metrics according to which the results will be sorted.</td>
+</tr>
+<tr>
+<td>max-results</td>
+<td>true</td>
+<td>Number of results in the results page.</td>
+</tr>
+<tr>
+<td>page-num</td>
+<td>true</td>
+<td>Page number of the result set.</td>
+</tr>
+</tbody></table>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<pre class="highlight ruby tab-ruby"><code><span class="n">request</span><span class="p">[</span><span class="s2">"x-api-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'YOURAPIKEY'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">columns</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">visit_device_type</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">m_visits</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">m_users</span><span class="se">\"\n</span><span class="s2"> ],</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">sort</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">-m_visits</span><span class="se">\"\n</span><span class="s2"> ],</span><span class="se">\n\"</span><span class="s2">space</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">s</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">     429023</span><span class="se">\n</span><span class="s2">   ]</span><span class="se">\n</span><span class="s2"> },</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">period</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">   </span><span class="se">\"</span><span class="s2">p1</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\n</span><span class="s2">     {</span><span class="se">\n</span><span class="s2">       </span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">D</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">       </span><span class="se">\"</span><span class="s2">start</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2019-10-24</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">       </span><span class="se">\"</span><span class="s2">end</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2019-10-24</span><span class="se">\"\n</span><span class="s2">     }</span><span class="se">\n</span><span class="s2">   ]</span><span class="se">\n</span><span class="s2"> },</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">max-results</span><span class="se">\"</span><span class="s2">: 50,</span><span class="se">\n</span><span class="s2"> </span><span class="se">\"</span><span class="s2">page-num</span><span class="se">\"</span><span class="s2">: 1</span><span class="se">\n</span><span class="s2">}"</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">"YOURAPIKEY"</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.atinternet.io/data/v3"</span>
+  -H <span class="s2">"x-api-key: YOURAPIKEY"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">"x-api-key"</span><span class="p">,</span> <span class="s2">"YOURAPIKEY"</span><span class="p">);</span>
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>AT Internet uses API keys to allow access to the API. You can register a new API key on your <a href="https://user-profile.atinternet-solutions.com/#/apikeys">profil page</a>.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>The access rights Advanced analyst is mandatory to use the API.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>API key has to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>x-api-key: YOURAPIKEY</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>YOURAPIKEY</code> with your personal API key.
 </aside>
-<h1 id='space'>Space</h1>
+<h1 id='sites-level-2-sites'>Sites / Level 2 sites</h1>
 <blockquote>
-<p>Request body:</p>
+<p>Retrieve 1 site :</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="s2">"space"</span><span class="p">:[</span><span class="w"> 
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="mi">456</span><span class="p">],</span><span class="w"> 
-        </span><span class="s2">"site_level2"</span><span class="p">:[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"B"</span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w"> 
-
+<pre class="highlight json tab-json"><code><span class="s2">"space"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"s"</span><span class="p">:[</span><span class="mi">547656</span><span class="p">]</span><span class="w">
+</span><span class="p">},</span><span class="w">
 </span></code></pre>
-<p>Sélection des sites/Niveaux 2 choisis pour l’analyse. </p>
+<blockquote>
+<p>Retrieve multiple sites :</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="s2">"space"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"s"</span><span class="p">:[</span><span class="mi">547656</span><span class="p">,</span><span class="w"> </span><span class="mi">547657</span><span class="p">]</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retrieve one level 2 site :</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w"> </span><span class="s2">"space"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"l2s"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"s"</span><span class="p">:</span><span class="w"> </span><span class="mi">547656</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"l2name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Data Query 3"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+ </span><span class="p">},</span><span class="w">
+</span></code></pre>
+<p>The <code>space</code> parameter allows you to get data relative to your site.</p>
+<h1 id='properties-and-metrics'>Properties and metrics</h1>
+<blockquote>
+<p>Body with one period :</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="s2">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+  </span><span class="s2">"d_device_type"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"m_visits"</span><span class="w"> 
+</span><span class="p">]</span><span class="w"> 
+</span></code></pre>
+<blockquote>
+<p>Body with multiple periods :</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="s2">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  
+  </span><span class="s2">"d_device_type"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"p1.m_visits"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"p2.m_visits"</span><span class="w">
+</span><span class="p">]</span><span class="w"> 
+</span></code></pre>
+<p>In the <code>columns</code> parameter you can enter all properties and metrics that might be available in the call. To obtain the properties and metrics labels, you can go to your <a href="https://management.atinternet-solutions.com/#/data-model/properties">Data Model</a> and look for the poperty key, or go to <a href="https://dataquery.atinternet-solutions.com/">Data Query 3</a> and hover the (i) next to name :</p>
 
-<p>L’objet « space » est une liste d’objet qui sont composé comme suit : </p>
+<p><img src="https://helpcentre.atinternet-solutions.com/hc/article_attachments/360005494580/preview-menu.gif" alt="Image of Yaktocat" /></p>
+<h1 id='period'>Period</h1>
+<p><code>p1</code> object is mandatory, it is the main period of analysis.
+<code>p2</code> object is optional, it describes the comparison period.</p>
 
 <table><thead>
 <tr>
-<th>Objet</th>
+<th>Parameter</th>
 <th>Description</th>
+<th>Possible values</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>site_id</td>
-<td>liste d’identifiant de site, séparés par des virgules</td>
-</tr>
-<tr>
-<td>site_level2</td>
-<td>liste d’identifiant de site, séparés par des virgules</td>
+<td>type</td>
+<td></td>
+<td>R(elative), D (absolute)</td>
 </tr>
 </tbody></table>
-<h1 id='periodes'>Periodes</h1>
-<p>L’objet « p1 » est obligatoire, il décrit la période de référence ou principale d’analyse.</p>
-
-<p>L’objet « p2 » est facultatif, il décrit la période de comparaison.</p>
-
-<p>Seules les périodes « p1 » et « p2 » fonctionnent aujourd’hui.</p>
-<h2 id='periodes-absolues'>Périodes absolues</h2>
-<blockquote>
-<p>Request body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-
-    </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-      </span><span class="p">{</span><span class="w">
-
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-
-        </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
-
-        </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="w">  </span><span class="err">&lt;Optionnel</span><span class="p">,</span><span class="w"> </span><span class="err">si</span><span class="w"> </span><span class="err">absent</span><span class="w"> </span><span class="err">end</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">start&gt;</span><span class="w">
-
-      </span><span class="p">}</span><span class="w">
-
-    </span><span class="p">],</span><span class="w">
-
-    </span><span class="s2">"p2"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">{</span><span class="w">
-
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-
-            </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
-
-            </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="w">  </span><span class="err">&lt;Optionnel</span><span class="p">,</span><span class="w"> </span><span class="err">si</span><span class="w"> </span><span class="err">absent</span><span class="w"> </span><span class="err">end</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">start&gt;</span><span class="w">
-
-          </span><span class="p">}</span><span class="w">
-
-        </span><span class="p">]</span><span class="w">
-
-  </span><span class="p">}</span><span class="w">
+<h2 id='absolute-periods'>Absolute periods</h2><pre class="highlight json tab-json"><code><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-20"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-24"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"p2"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-15"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-19"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Format de Date : <strong><em>yyyy-mm-dd</em></strong></p>
-<h2 id='periodes-relatives'>Périodes relatives</h2>
-<blockquote>
-<p>Request body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-
+<p>Date format : yyyy-mm-dd</p>
+<h2 id='relative-periods'>Relative periods</h2><pre class="highlight json tab-json"><code><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
       </span><span class="p">{</span><span class="w">
-
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R"</span><span class="p">,</span><span class="w">
-
-        </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Y</span><span class="p">,</span><span class="w"> </span><span class="err">Q</span><span class="p">,</span><span class="w"> </span><span class="err">M</span><span class="p">,</span><span class="w"> </span><span class="err">W</span><span class="p">,</span><span class="w"> </span><span class="err">D</span><span class="w">
-
+        </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"offSet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="w">
-
       </span><span class="p">}</span><span class="w">
-
     </span><span class="p">],</span><span class="w">
-
     </span><span class="s2">"p2"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
       </span><span class="p">{</span><span class="w">
-
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R"</span><span class="p">,</span><span class="w">
-
-        </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Y</span><span class="p">,</span><span class="w"> </span><span class="err">Q</span><span class="p">,</span><span class="w"> </span><span class="err">M</span><span class="p">,</span><span class="w"> </span><span class="err">W</span><span class="p">,</span><span class="w"> </span><span class="err">D</span><span class="w">
-
+        </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"offSet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-2"</span><span class="w">
-
       </span><span class="p">}</span><span class="w">
-
     </span><span class="p">]</span><span class="w">
-
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>L’heure actuelle dans le fuseau horaire du site le plus à l’ouest est le référentiel.</p>
-
 <table><thead>
 <tr>
-<th>Paramètres</th>
+<th>Parameter</th>
 <th>Description</th>
+<th>Possible values</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>granularity</td>
-<td>Granularité de la période</td>
+<td>-</td>
+<td>Y(ear), Q(uarter), M(onth), W(eek), D(ay)</td>
 </tr>
 <tr>
-<td>offset</td>
-<td>Décalage de la période</td>
+<td>offSet</td>
+<td>-</td>
+<td>Number</td>
 </tr>
 </tbody></table>
-<h1 id='evolution'>Evolution</h1>
+<h1 id='filter'>Filter</h1>
 <blockquote>
-<p>Request body </p>
+<p>Example : (visit <strong>equal to</strong> 19) <em>AND</em> (device type <strong>equal to</strong> Tablet <em>or</em> Desktop) <em>AND</em> (source <strong>start</strong> by Referrer )</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"evo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="s2">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"metric"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"$AND"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"m_visits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"$eq"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"property"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"$AND"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"$OR"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+          </span><span class="s2">"visit_device_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"$eq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tablet"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"visit_device_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"$eq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Desktop"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w"> 
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"visit_src"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"$start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Referrer"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
 
-    </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-    </span><span class="s2">"top"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-
-      </span><span class="s2">"max-results"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> 
-
-      </span><span class="s2">"page-num"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-
-      </span><span class="s2">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-m_visits"</span><span class="p">],</span><span class="w"> 
-
-      </span><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-
-        </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
-
-          </span><span class="p">{</span><span class="w"> 
-
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
-
-            </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-12"</span><span class="p">,</span><span class="w"> 
-
-            </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-16"</span><span class="w"> 
-
-          </span><span class="p">}</span><span class="w"> 
-
-        </span><span class="p">]</span><span class="w"> 
-
-      </span><span class="p">}</span><span class="w"> 
-
+</span></code></pre>
+<p>If you want to filter your dataset, you have to use the <code>filter</code> object. You can filter on properties or metrics.</p>
+<h3 id='filter-on-number'>Filter on number</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$eq</td>
+<td>Equals to</td>
+</tr>
+<tr>
+<td>$neq</td>
+<td>Does not equal</td>
+</tr>
+<tr>
+<td>$in</td>
+<td>Array</td>
+</tr>
+<tr>
+<td>$gt</td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td>$gte</td>
+<td>Greater or equal to</td>
+</tr>
+<tr>
+<td>$lt</td>
+<td>Lower than</td>
+</tr>
+<tr>
+<td>$lte</td>
+<td>Lower or equal to</td>
+</tr>
+<tr>
+<td>$na</td>
+<td>true or false - NULL value</td>
+</tr>
+<tr>
+<td>$undefined</td>
+<td>true or false - undefined</td>
+</tr>
+<tr>
+<td>$empty</td>
+<td>true or false - combinaison de $na et $undefined</td>
+</tr>
+</tbody></table>
+<h3 id='filter-on-string'>Filter on string</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$eq</td>
+<td>Equals to</td>
+</tr>
+<tr>
+<td>$neq</td>
+<td>Does not equal</td>
+</tr>
+<tr>
+<td>$in</td>
+<td>Array</td>
+</tr>
+<tr>
+<td>$lk</td>
+<td>Contains</td>
+</tr>
+<tr>
+<td>$lk</td>
+<td>Does not contain</td>
+</tr>
+<tr>
+<td>$start</td>
+<td>Start with</td>
+</tr>
+<tr>
+<td>$nstart</td>
+<td>Does not start with</td>
+</tr>
+<tr>
+<td>$end</td>
+<td>End with</td>
+</tr>
+<tr>
+<td>$nend</td>
+<td>Does not end with</td>
+</tr>
+<tr>
+<td>$na</td>
+<td>true or false - NULL value</td>
+</tr>
+<tr>
+<td>$undefined</td>
+<td>true or false - undefined</td>
+</tr>
+<tr>
+<td>$empty</td>
+<td>true or false - combinaison de $na et $undefined</td>
+</tr>
+</tbody></table>
+<h3 id='filter-on-date'>Filter on date</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$eq</td>
+<td>Equals to</td>
+</tr>
+<tr>
+<td>$gt</td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td>$gte</td>
+<td>Greater or equal to</td>
+</tr>
+<tr>
+<td>$lt</td>
+<td>Lower than</td>
+</tr>
+<tr>
+<td>$lte</td>
+<td>Lower or equal to</td>
+</tr>
+</tbody></table>
+<h3 id='filter-on-boolean'>Filter on boolean</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$eq</td>
+<td>Equals to</td>
+</tr>
+<tr>
+<td>$neq</td>
+<td>Does not equal</td>
+</tr>
+<tr>
+<td>$na</td>
+<td>true or false - NULL value</td>
+</tr>
+<tr>
+<td>$undefined</td>
+<td>true or false - undefined</td>
+</tr>
+<tr>
+<td>$empty</td>
+<td>true or false - combinaison de $na et $undefined</td>
+</tr>
+</tbody></table>
+<h1 id='evolution'>Evolution</h1><pre class="highlight json tab-json"><code><span class="s2">"evo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+  </span><span class="s2">"granularity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">mandatory</span><span class="w">
+  </span><span class="s2">"top"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+    </span><span class="s2">"max-results"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"page-num"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-m_visits"</span><span class="p">],</span><span class="w"> 
+    </span><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+      </span><span class="s2">"p1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+        </span><span class="p">{</span><span class="w"> 
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-12"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-16"</span><span class="w"> 
+        </span><span class="p">}</span><span class="w"> 
+      </span><span class="p">]</span><span class="w"> 
     </span><span class="p">}</span><span class="w"> 
-
   </span><span class="p">}</span><span class="w"> 
+</span><span class="p">}</span><span class="w"> 
 </span></code></pre>
 <p>Le paramètre « evo » décrit le contexte du calcul de l’évolution de l’analyse. Il est composé de différents paramètres obligatoires : </p>
 
 <table><thead>
 <tr>
-<th>Paramètres</th>
+<th>Parameter</th>
 <th>Description</th>
-<th>Valeurs possibles</th>
+<th>Possibles values</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -487,58 +830,84 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <td>any number</td>
 </tr>
 </tbody></table>
-<h1 id='sort'>Sort</h1>
-<blockquote>
-<p>Request body:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="s2">"sort"</span><span class="p">:[</span><span class="s2">"m_visits"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-p1.m_uv"</span><span class="p">]</span><span class="w"> 
-
+<h1 id='sort-by'>Sort by</h1><pre class="highlight json tab-json"><code><span class="s2">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"m_visits"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"-p1.m_uv"</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>Le &quot;-&quot; permet de trier de manière décroissante. </p>
+<p>The &quot;-&quot; allows you to sort in a decreasing way.</p>
 
-<p>Il est possible de trier sur autant de colonnes que souhaitées. </p>
+<p>It is possible to sort on as many columns as desired.</p>
 
-<p>Il n&#39;est pas possible de trier sur une propriété, le tri s&#39;effectue seulement sur une ou plusieurs métriques. </p>
+<p>It is not possible to sort on a property, the sorting is only done on one or more metrics.</p>
 
-<p>Il n&#39;est pas possible de trier sur une colonne non présente dans le paramètre &quot;columns&quot; de l&#39;URL.</p>
-<h1 id='columns'>Columns</h1>
-<blockquote>
-<p>Request body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+<p>It is not possible to sort on a column not present in the &quot;columns&quot; parameter of the URL.</p>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
 
-    </span><span class="s2">"visit_src"</span><span class="p">,</span><span class="w"> 
+<p>The Kittn API uses the following error codes:</p>
 
-    </span><span class="s2">"visit_device_type"</span><span class="p">,</span><span class="w"> 
-
-    </span><span class="s2">"m_visits"</span><span class="w"> 
-
-  </span><span class="p">]</span><span class="w"> 
-</span></code></pre>
-<p>Identification des colonnes à afficher dans les données de retour.</p>
-
-<blockquote>
-<p>Request body with multiple periods</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  
-
-       </span><span class="s2">"p1.m_uv"</span><span class="p">,</span><span class="w"> 
-
-       </span><span class="s2">"p2.m_uv"</span><span class="p">,</span><span class="w"> 
-
-       </span><span class="s2">"var_p2_p1_m_uv"</span><span class="p">,</span><span class="w"> 
-
-       </span><span class="s2">"p1.m_visits"</span><span class="w">
-
-</span><span class="p">]</span><span class="w"> 
-</span></code></pre>
-<p>En multi périodes, les métriques doivent être préfixées par la période sur laquelle elles s’appliquent :  </p>
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="ruby">ruby</a>
           </div>
       </div>
     </div>
