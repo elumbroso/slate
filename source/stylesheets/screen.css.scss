@@ -116,9 +116,12 @@ html, body {
     transition-duration: 180ms;
     transition-timing-function: ease-in-out;
     background: $nav-subitem-bg;
+    
     &.visible {
       height: 30%;
       margin-bottom: 1em;
+      background: white;
+      border-bottom: 1px solid #ececec;
     }
 
     li {
@@ -156,7 +159,7 @@ html, body {
 
   // This is the currently selected ToC entry
   .toc-link.active {
-    background-color: $nav-active-bg;
+    //background-color: $nav-active-bg;
     color: $nav-active-text;
   }
 
@@ -349,14 +352,12 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 25px;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    margin-bottom: $h1-margin-bottom;
-    margin-top: 2em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background-color: #fdfdfd;
+    font-size: 21px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 24px;
+    padding-bottom: 15px;
+    background: $main-bg;
+    z-index: 99;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -400,37 +401,34 @@ html, body {
   }
 
   table {
-    margin-bottom: 1em;
     overflow: auto;
-    th,td {
+    width: 50%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 1em;
+    th {
       text-align: left;
-      vertical-align: top;
-      line-height: 1.6;
+      padding: 8px;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: .7rem;
+      background: #e1e5eb;
       code {
         white-space: nowrap;
       }
     }
-
-    th {
-      padding: 5px 10px;
-      border-bottom: 1px solid #ccc;
-      vertical-align: bottom;
-    }
-
     td {
-      padding: 10px;
-    }
+      text-align: left;
+      padding: 8px;
+      color: #4f4f4f;
 
-    tr:last-child {
-      border-bottom: 1px solid #ccc;
+      
     }
-
-    tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+    tr {
+      background: white;
     }
-
-    tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+    tr:nth-child(odd) {
+      background: #fcfcfc;
     }
   }
 
@@ -463,40 +461,36 @@ html, body {
     background-color: transparent;
     padding: 0;
   }
-
   aside {
+    position: relative;
     padding-top: 1em;
     padding-bottom: 1em;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
-    background: $aside-notice-bg;
+    padding-left: 20px;
+    background: #f6f6f7;
     line-height: 1.6;
+    &:before {
+      content: "";
+      top: 0;
+      left: 0;
+      position: absolute;
+      width: 4px;
+      height: 100%;
+      background: $aside-notice-bg;
+    }
 
     &.warning {
-      background-color: $aside-warning-bg;
+      &:before {
+        background: $aside-warning-bg;
+      }
     }
 
     &.success {
-      background-color: $aside-success-bg;
+      &:before {
+        background: $aside-success-bg;
+      }
     }
-  }
-
-  aside:before {
-    vertical-align: middle;
-    padding-right: 0.5em;
-    font-size: 14px;
-  }
-
-  aside.notice:before {
-    @extend %icon-info-sign;
-  }
-
-  aside.warning:before {
-    @extend %icon-exclamation-sign;
-  }
-
-  aside.success:before {
-    @extend %icon-ok-sign;
   }
 
   .search-highlight {
@@ -542,13 +536,22 @@ html, body {
     padding-top: 2em;
     padding-bottom: 2em;
     padding: 2em $main-padding;
+
+    padding: 24px;
+margin: .5em 0;
+overflow: auto;
+background: url('data:image/svg+xml;charset=utf-8,<svg%20version%3D"1.1"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20width%3D"100"%20height%3D"100"%20fill%3D"rgba(0%2C0%2C0%2C.2)">%0D%0A<polygon%20points%3D"0%2C50%2050%2C0%200%2C0"%20%2F>%0D%0A<polygon%20points%3D"0%2C100%2050%2C100%20100%2C50%20100%2C0"%20%2F>%0D%0A<%2Fsvg>');
+    background-size: auto;
+background-size: 1em 1em;
   }
 
   blockquote {
     &>p {
       background-color: $code-annotation-bg;
       padding: $code-annotation-padding 2em;
+      padding: 8px 2em;
       color: #eee;
+      margin-top: 8px;
     }
   }
 }
